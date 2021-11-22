@@ -63,6 +63,8 @@ class TwitchPubSub {
     console.log('PubSub connection closed By Twitch ', Date.now());
     this.connection.close();
     //handle force reconnect... tbd
+    clearInterval(this.heartbeat);
+    setTimeout(this.connect(), 3000);
   };
 
   onRedeem({ data: psObject }) {

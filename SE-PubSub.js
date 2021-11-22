@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@thekillgfx 
-pjonp
-/
-pjTestBot
-Public
-3
-35
-Code
-Issues
-1
-Pull requests
-2
-Actions
-Projects
-Wiki
-Security
-Insights
-pjTestBot/modules/.SE_Overlays/emojiRotator/sePubSub_beta.js /
-@pjonp
-pjonp emojiRotator 1.0.0
-Latest commit 51a070a on 17 Oct
- History
- 1 contributor
-146 lines (132 sloc)  4.42 KB
-   
 /*
 Copyright 2021 pjonp
 This program is free software: you can redistribute it and/or modify

@@ -83,15 +83,15 @@ class TwitchPubSub {
         "event": {
           "service": "twitch",
           "data": {
-            "time": new Date(message.timestamp).getTime(),
+            "time": new Date(message.data.timestamp).getTime(),
             "nick": message.data.redemption.user.display_name,
             "userId": message.data.redemption.user.id,
-            "info": message.data.reward.prompt,
-            "title": message.data.reward.title,
-            "cost": message.data.reward.cost,
-            "image": message.data.reward.image,
-            "defaultImage": message.data.reward.default_image,
-            "userInput": message.data.user_input
+            "info": message.data.redemption.reward.prompt,
+            "title": message.data.redemption.reward.title,
+            "cost": message.data.redemption.reward.cost,
+            "image": message.data.redemption.reward.image,
+            "defaultImage": message.data.redemption.reward.default_image,
+            "userInput": message.data.redemption.user_input
           },
         },
       }
@@ -102,7 +102,7 @@ class TwitchPubSub {
 
 /*
 window.addEventListener('onWidgetLoad', obj => {
-  new TwitchPubSub(obj.detail.channel.providerId).connect();
+  new TwitchPubSub(obj.detail.channel.providerId, token).connect(); //token without Bearer
 });
 window.addEventListener('onEventReceived', obj => {
   const event = obj.detail.event;

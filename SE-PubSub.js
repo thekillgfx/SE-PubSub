@@ -12,8 +12,9 @@ This program is free software: you can redistribute it and/or modify
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 class TwitchPubSub {
-  constructor(channel) {
-    this.topic = `dashboard-activity-feed.${channel}`;
+  constructor(channel, token) {
+    this.topic = `channel-points-channel-v1.${channel}`;
+    this.token = token;
   };
 
   connect() {
@@ -71,7 +72,7 @@ class TwitchPubSub {
     else if (psObject.type === 'RECONNECT') return this.reconnect();
     else if (psObject.type === 'MESSAGE' && psObject.data.topic === this.topic) {
       let message = JSON.parse(psObject.data.message);
-      if (message.type === 'channel_points_custom_reward_redemption') return this.emitPuSub(message);
+      if (message.type === 'reward-redeemed') return this.emitPuSub(message); //channel_points_custom_reward_redemption
     };
   };
 
@@ -83,14 +84,14 @@ class TwitchPubSub {
           "service": "twitch",
           "data": {
             "time": new Date(message.timestamp).getTime(),
-            "tags": message,
-            "nick": message.channel_points_redeeming_user.login,
-            "userId": message.channel_points_redeeming_user.id,
-            "displayName": message.channel_points_redeeming_user.display_name,
-            "text": message.channel_points_user_input,
-            "rewardId": message.channel_points_reward_id,
-            "rewardTitle": message.channel_points_reward_title,
-            "id": message.channel_points_redemption_id,
+            "nick": message.data.redemption.user.display_name,
+            "userId": message.data.redemption.user.id,
+            "info": message.data.reward.prompt,
+            "title": message.data.reward.title,
+            "cost": message.data.reward.cost,
+            "image": message.data.reward.image,
+            "defaultImage": message.data.reward.default_image,
+            "userInput": message.data.user_input
           },
         },
       }
